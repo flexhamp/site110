@@ -108,39 +108,3 @@ body {
 	text-align: center;
 }
 
-#header ul {
-				position: relative;
-				margin: 0px auto;
-		    list-style: none outside none;
-		    width: 250px;
-		}
-		#header ul li {
-		    height: 250px;
-		    width: 250px;
-		}
-
-		#localClock .jqc-clock-face{
-		    background: url("../images/clock/localclock.png") no-repeat scroll 0 0 transparent;
-		}
-
-		.jqc-clock-sec span {
-		    background: url("../images/clock/seconds.png") no-repeat scroll 0 0 transparent;
-		    box-shadow: 0 0;
-		    height: 106px;
-		    margin-top: 36px;
-		    width: 4px;
-		}
-		.jqc-clock-min span {
-		    background: url("images/clock/minutes.png") no-repeat scroll 0 0 transparent;
-		    box-shadow: 0 0;
-		    height: 106px;
-		    margin-top: 51px;
-		    width: 6px;
-		}
-		.jqc-clock-hour span {
-		    background: url("images/clock/hours.png") no-repeat scroll 0 0 transparent;
-		    box-shadow: 0 0;
-		    height: 106px;
-		    margin-top: 69px;
-		    width: 10px;
-		}

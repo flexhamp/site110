@@ -90,12 +90,11 @@ $ny = $dateTime->format('m/d/Y H:i:s');
 
   </style>
 
-	<title>Аргументы и факты ГТП</title>
+	<title>Welcome to the 110 website</title>
 </head>
 <body>
 	<div id="main">
 		<div id="header">
-			<!-- <div class="clock"><p>12:55</p></div> -->
 				<ul>
             <li id="localClock"></li>
         </ul>
@@ -115,58 +114,34 @@ $ny = $dateTime->format('m/d/Y H:i:s');
 				<a href="shops.php"><img src="images/icon/news.png" alt=""></a>
 			</div>
 			<div class="menubutton">
-				<img src="images/icon/shop.png" alt="">				
 				<p>Магазины</p>
+				<img src="images/icon/shop.png" alt="">
 			</div>
 			<div class="menubutton">
-				<img src="images/icon/contactop.png" alt="">			
 				<p>Контакты ОП</p>
+				<img src="images/icon/contactop.png" alt="">			
 			</div>
 			<div class="menubutton">
-				<img src="images/icon/contactoffice.png" alt="">		
 				<p>Контакты офиса</p>
+				<a href="contact_list.php"><img src="images/icon/contactoffice.png" alt=""></a>	
 			</div>
 			<div class="menubutton">
-				<img src="images/icon/info.png" alt="">
 				<p>Инструкции</p>
+				<img src="images/icon/info.png" alt="">
 			</div>
 			<div class="menubutton">
-				<img src="images/icon/grafic.png" alt="">
 				<p>График дежурств</p>
+				<img src="images/icon/grafic.png" alt="">
 			</div>
 			<div class="menubutton">
-				<img src="images/icon/data.png" alt="">
 				<p>Доп. данные</p>
+				<img src="images/icon/data.png" alt="">
 			</div>
 			<div class="menubutton">
-				<img src="images/icon/zayavki.png" alt="">
 				<p>Заявки по офису</p>
+				<img src="images/icon/zayavki.png" alt="">
 			</div>
 			<div class="clear"></div>	
-
-
-<!--  -->
-<section class="container"><link rel="stylesheet" id="switch_style" href=""> 
- 
-<h2>jQuery Switch Styles</h2> 
- 
-<p>Use jQuery to easily change the stylesheet of your page.</p> 
- 
-<p>Let your visitors choose your website styling.</p> 
- 
-<h4>Pick one of the boxes below to change the stylesheet.</h4> 
- 
-<p>The stylesheet has one property that is the change the body background colour.</p> 
- 
-<div class="box" id="green"></div> 
- 
-<div class="box" id="style"></div> 
-
- 
-</section> 
-
-
-<!--  -->
 		</div>
 	</div>	
 </body>
