@@ -1,0 +1,146 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: #fff;
+	margin: 0;
+	padding: 0;
+}
+
+.clear {
+	clear: both;
+}
+
+#main {
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	position: relative;
+	margin: 0px auto;
+	width: 778px;
+	padding-top: 10px;
+	/*outline: 1px solid #000;*/
+}
+
+.clock {
+	position: relative;
+	margin: 20px auto;
+	width: 140px;
+	font: 600 44px Tahoma;
+}
+
+.logo {
+	position: relative;
+	margin: 0px auto;
+	width: 380px;
+	height: 120px;
+	background: url(../images/logo.png) no-repeat center;
+	-webkit-background-size: 100%;
+	background-size: 100%;
+}
+
+.serch {
+	position: relative;
+	margin: 0px auto;
+	width: 708px;
+	padding-top: 20px;
+}
+
+.serch input {
+	margin: 0;
+	padding: 0;
+}
+
+.serch input[type="text"] {
+	width: 620px;
+	height: 24px;
+}
+
+.serch input[type="submit"] {
+	width: 80px;
+	height: 28px;
+}
+
+#menu {
+	position: relative;
+	width: 778px;
+	margin: 0px auto;
+	/*outline: 1px solid #000;*/
+}
+
+.menubutton {
+	position: relative;
+	display: block;
+	float: left;
+	width: 150px;
+	height: 150px;
+	margin-left: 36px;
+	/*outline: 1px solid #000;*/
+}
+
+.menubutton img {
+	display: block;
+	position: relative;
+	width: 150px;
+	height: 150px;
+	cursor: pointer;
+}
+.menubutton img:hover {
+	margin-top: 2px;
+}
+
+.menubutton img:active {
+	margin-top: 3px;
+	margin-left: 2px
+}
+
+
+.menubutton p{
+	display: block;
+	position: absolute;
+	font: 400 16px Tahoma;
+	bottom: 7px;
+	width: 150px;
+	text-align: center;
+}
+
+#header ul {
+				position: relative;
+				margin: 0px auto;
+		    list-style: none outside none;
+		    width: 250px;
+		}
+		#header ul li {
+		    height: 250px;
+		    width: 250px;
+		}
+
+		#localClock .jqc-clock-face{
+		    background: url("../images/clock/localclock.png") no-repeat scroll 0 0 transparent;
+		}
+
+		.jqc-clock-sec span {
+		    background: url("../images/clock/seconds.png") no-repeat scroll 0 0 transparent;
+		    box-shadow: 0 0;
+		    height: 106px;
+		    margin-top: 36px;
+		    width: 4px;
+		}
+		.jqc-clock-min span {
+		    background: url("images/clock/minutes.png") no-repeat scroll 0 0 transparent;
+		    box-shadow: 0 0;
+		    height: 106px;
+		    margin-top: 51px;
+		    width: 6px;
+		}
+		.jqc-clock-hour span {
+		    background: url("images/clock/hours.png") no-repeat scroll 0 0 transparent;
+		    box-shadow: 0 0;
+		    height: 106px;
+		    margin-top: 69px;
+		    width: 10px;
+		}
