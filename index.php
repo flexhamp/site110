@@ -1,10 +1,3 @@
-<?php
-$dateTime = new DateTime();
-
-$dateTime->setTimeZone(new DateTimeZone('America/New_York'));
-$ny = $dateTime->format('m/d/Y H:i:s');
-?>
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -26,6 +19,7 @@ $ny = $dateTime->format('m/d/Y H:i:s');
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	
+	<!-- Script for Clock -->
 	<script>
 	jQuery(function () {
 	    jQuery('#localClock').clock({
@@ -34,6 +28,7 @@ $ny = $dateTime->format('m/d/Y H:i:s');
 	    });
 	});
   </script>
+  <!-- Style for Clock -->
 	<style>
 		/*For Clock*/
 		#header ul {
@@ -87,7 +82,6 @@ $ny = $dateTime->format('m/d/Y H:i:s');
 		#style {
 			background-color:green;
 		}
-
   </style>
 
 	<title>Welcome to the 110 website</title>
