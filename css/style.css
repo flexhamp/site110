@@ -326,6 +326,33 @@ body {
 	padding: 0;
 }    
 
+
+#old-browser {
+	display: block;
+	width: 800px;
+	margin: 50px auto;
+	font: 800 18px Arial; 
+	text-align: center;
+}
+
+#old-browser a{
+	text-decoration: none;
+	color: #0A62A6;
+}
+
+#noscript {
+	text-align: center;
+}
+
+.error {
+	font: 800 18px Arial; 
+	color: #F40F0F;
+}
+
+.error a{
+	text-decoration: none;
+}
+
 .clear {
 	clear: both;
 }
