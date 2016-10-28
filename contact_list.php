@@ -24,61 +24,50 @@
 	<title>Welcome to the 110 contact office</title>
 </head>
 <body>
-	<div id="menu">
-		<div class="menubutton">
+	<!-- Secondary menu -->
+	<div id="secondarymenu">
+		<div class="secondarybutton">
 			<p>Вернуться на главную</p>
-			<a href="shops.php"><img src="images/icon/home.jpg" alt=""></a>
+			<a href="index.php"><img src="images/icon/home.png" alt=""></a>
 		</div>
-		<div class="menubutton">
+		<div class="secondarybutton">
 			<p>Добавить контакт</p>
 			<a href="shops.php"><img src="images/icon/add.png" alt=""></a>
 		</div>
-		<div class="menubutton">
+		<div class="secondarybutton">
 			<p>Удаление контакта</p>
 			<a href="shops.php"><img src="images/icon/del.png" alt=""></a>
 		</div>
 	</div>
+	<div class="clear"></div>
 
-	<a href='index.php' style='margin-left:20px'>Вернуться на главную</a>
-	<a href='add_contact_list.php' style='margin-left:20px'>Добавить контакт</a>
-	<a href='del_contact_list.php' style='margin-left:20px'>Удаление контакта</a>
-</div>
-
-<table ALIGN=CENTER>
-	<tr>
-		<td style='padding:25px'>
-			<?php echo '<form action="'.$_SERVER['PHP_SELF'].'" method="POST">'; ?>
-			<label>Поиск по IP</label>
-			<input size="20" type="text" id="IP" name="IP">
-			<input type="submit" value="Искать">
+	<div class="search-field">
+		<form class="form-wrapper cf" action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
+			<input type="text" placeholder="Поиск по IP..." id="IP" name="IP" required>
+			<button type="submit">Искать</button> 
 		</form> 
-	</td>
-	<td style='padding:25px'>
-		<?php echo '<form action="'.$_SERVER['PHP_SELF'].'" method="POST">'; ?>
-		<label>Поиск по ФИО</label>
-		<input size="50" type="text" id="name_fio" name="name_fio">
-		<input type="submit" value="Искать">
-	</form> 
-</td>
+		<form class="form-wrapper cf" action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
+			<input type="text" placeholder="Поиск по ФИО..." id="name_fio" name="name_fio" required>
+			<button type="submit">Искать</button> 
+		</form> 
+		<form class="form-wrapper cf" action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
+			<select name = 'otdel' style='margin-left:5px'>
+				<?php $sql_otdel = 'SELECT * FROM otdel ORDER BY who';
+				$result_select_otdel = mysql_query($sql_otdel);	
+				echo "<label style='margin-left:10px'>Отдел</label>";
+				echo "<option value = '' ></option>"; 
+				while($object = mysql_fetch_object($result_select_otdel))
+				{ 
+					echo "<option value = '$object->id' > $object->who </option>"; 
+				}
+				echo "</select>";
+				?>
+			</select>
+			<button type="submit">Отдел</button> 
+		</form> 
+	</div>
 
-<td style='padding:25px'>
-	<?php echo '<form action="'.$_SERVER['PHP_SELF'].'" method="POST">';
-	$sql_otdel = 'SELECT * FROM otdel ORDER BY who';
-					$result_select_otdel = mysql_query($sql_otdel);// or die('Запрос не удался: ' . mysql_error());			
-					echo "<label style='margin-left:10px'>Отдел</label>";
-					echo "<select name = 'otdel' style='margin-left:5px'>";
-					echo "<option value = '' ></option>"; 
-					while($object = mysql_fetch_object($result_select_otdel))
-					{ 
-						echo "<option value = '$object->id' > $object->who </option>"; 
-					}
-					echo "</select>";
-					?>
-					<input type="submit" value="Выбрать">
-				</form> 
-			</td>
-		</tr>
-	</table>
+
 	<?php
 	$bool_serch = 0;
 	

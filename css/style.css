@@ -102,9 +102,230 @@ body {
 .menubutton p{
 	display: block;
 	position: absolute;
-	font: 400 16px Tahoma;
+	font: 400 12px Tahoma;
 	bottom: 7px;
 	width: 150px;
 	text-align: center;
 }
 
+
+#secondarymenu {
+	position: relative;
+	width: 450px;
+	margin: 0px auto;
+	/*outline: 1px solid #000;*/
+}
+
+.secondarybutton {
+	position: relative;
+	display: block;
+	float: left;
+	width: 150px;
+	height: 120px;
+}
+
+.secondarybutton img {
+	display: block;
+	position: relative;
+	margin: 0px auto;
+	width: 92px;
+	height: 92px;
+	cursor: pointer;
+}
+.secondarybutton img:hover {
+	margin-top: 2px;
+}
+
+.secondarybutton img:active {
+	margin-top: 3px;
+	margin-left: 27%;
+}
+
+.secondarybutton p{
+	display: block;
+	position: absolute;
+	font: 400 12px Tahoma;
+	bottom: 7px;
+	width: 150px;
+	text-align: center;
+}
+
+/*Стиль формы поиска*/
+/*Отмена обтекания текстом*/
+.cf:before, .cf:after{
+	content:"";
+	display:table;
+}
+
+.cf:after{
+	clear:both;
+}
+
+.cf{
+	zoom:1;
+}
+/*Элементы формы*/
+/* Стили для контейнера формы */
+
+.search-field {
+	position: relative;
+	margin: 0px auto;
+	width: 1025px;
+}
+.form-wrapper {
+	display: inline-block;
+	position: relative;
+	margin: 10px auto;
+	width: 330px;
+	padding: 3px;    
+	background: #444;
+	background: rgba(0,0,0,.2);
+	border-radius: 10px;
+	box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
+}
+
+/* Стили поля ввода текста */
+
+.form-wrapper input {
+	width: 210px;
+	height: 30px;
+	padding: 10px 5px;
+	float: left;    
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border: 0;
+	background: #eee;
+	border-radius: 3px 0 0 3px;      
+}
+
+.form-wrapper input:focus {
+	outline: 0;
+	background: #fff;
+	box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+}
+
+.form-wrapper input::-webkit-input-placeholder {
+	color: #999;
+	font-weight: normal;
+	font-style: italic;
+}
+
+.form-wrapper input:-moz-placeholder {
+	color: #999;
+	font-weight: normal;
+	font-style: italic;
+}
+
+.form-wrapper input:-ms-input-placeholder {
+	color: #999;
+	font-weight: normal;
+	font-style: italic;
+}   
+
+/*Стиль для селекта*/
+.form-wrapper select {
+	width: 210px;
+	height: 30px;
+	padding: 0px 10px;
+	float: left;    
+	font: bold 12px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border: 0;
+	background: #eee;
+	border-radius: 3px 0 0 3px;      
+}
+
+.form-wrapper select:focus {
+	outline: 0;
+	background: #fff;
+	box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+}
+
+.form-wrapper select::-webkit-input-placeholder {
+	color: #999;
+	font-weight: normal;
+	font-style: italic;
+}
+
+.form-wrapper select:-moz-placeholder {
+	color: #999;
+	font-weight: normal;
+	font-style: italic;
+}
+
+.form-wrapper select:-ms-input-placeholder {
+	color: #999;
+	font-weight: normal;
+	font-style: italic;
+} 
+.form-wrapper label {
+	overflow: visible;
+	position: relative;
+	float: right;
+	border: 0;
+	padding: 0;
+	height: 30px;
+	text-align: center;
+	width: 110px;
+	font: bold 15px/30px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: #fff;
+	text-transform: uppercase;
+	background: #d83c3c;
+	border-radius: 0 7px 7px 0;      
+	text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
+}  
+
+
+/* Кнопка отправки формы */
+.form-wrapper button {
+	overflow: visible;
+	position: relative;
+	float: right;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	height: 30px;
+	width: 110px;
+	font: bold 15px/30px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: #fff;
+	text-transform: uppercase;
+	background: #d83c3c;
+	border-radius: 0 7px 7px 0;      
+	text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
+}   
+
+.form-wrapper button:hover{     
+	background: #e54040;
+}   
+
+.form-wrapper button:active,
+.form-wrapper button:focus{   
+	background: #c42f2f;
+	outline: 0;   
+}
+
+.form-wrapper button:before { /* стрелка влево */
+	content: '';
+	position: absolute;
+	border-width: 8px 8px 8px 0;
+	border-style: solid solid solid none;
+	border-color: transparent #d83c3c transparent;
+	top: 7px;
+	left: -6px;
+}
+
+.form-wrapper button:hover:before{
+	border-right-color: #e54040;
+}
+
+.form-wrapper button:focus:before,
+.form-wrapper button:active:before{
+	border-right-color: #c42f2f;
+}      
+
+.form-wrapper button::-moz-focus-inner { /* Удаляем дополнительное пространство рядом с кнопкой в Mozilla Firefox */
+	border: 0;
+	padding: 0;
+}    
+
+.clear {
+	clear: both;
+}
