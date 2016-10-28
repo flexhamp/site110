@@ -43,74 +43,64 @@
 
 	<div class="search-field">
 		<form class="form-wrapper cf" action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
+			<input type="hidden" name="action" value="ip">
 			<input type="text" placeholder="Поиск по IP..." id="IP" name="IP" required>
 			<button type="submit">Искать</button> 
 		</form> 
 		<form class="form-wrapper cf" action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
+			<input type="hidden" name="action" value="fio">
 			<input type="text" placeholder="Поиск по ФИО..." id="name_fio" name="name_fio" required>
 			<button type="submit">Искать</button> 
 		</form> 
 		<form class="form-wrapper cf" action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
-			<select name = 'otdel' style='margin-left:5px'>
+			<input type="hidden" name="action" value="otdel">
+			<select name="otdel">
 				<?php $sql_otdel = 'SELECT * FROM otdel ORDER BY who';
-				$result_select_otdel = mysql_query($sql_otdel);	
-				echo "<label style='margin-left:10px'>Отдел</label>";
-				echo "<option value = '' ></option>"; 
-				while($object = mysql_fetch_object($result_select_otdel))
-				{ 
-					echo "<option value = '$object->id' > $object->who </option>"; 
-				}
-				echo "</select>";
-				?>
+				$result_select_otdel = mysql_query($sql_otdel);	?>
+				<label>Отдел</label>
+				<option value = '' ></option>
+				<?php 
+				while($object = mysql_fetch_object($result_select_otdel))	{ ?>
+				<option value="<?php echo $object->id ?>" > <?php echo $object->who ?></option>"; 
+				<?php }?>
 			</select>
-			<button type="submit">Отдел</button> 
-		</form> 
-	</div>
+			
+		</select>
+		<button type="submit">Отдел</button> 
+	</form> 
+</div>
+
+<h2 class="center">Контакты офиса</h2>
 
 
-	<?php
-	$bool_serch = 0;
-	
-	
-	if($_POST['IP'])
-	{
-		$IP = $_POST['IP'];
-	}
-	else if($_POST['name_fio'])
-	{
-		$name_fio = $_POST['name_fio']; // передаем переменной значение глобального массива POST
-	}
-	else if($_POST['otdel'])
-	{
-		$otdel = $_POST['otdel'];
-	}
-	if ($_POST['IP'] != "" || $name_fio != "" || $otdel != "")
-	{
+
+<div class="table-contact-list">
+	<table class="center" border="1" cellspacing="0" cellpadding="4">
+		<?php
 		$bool_serch = 0;
-		$bool_otdel = 0;
-		$q_p = "SELECT * FROM contact WHERE tel LIKE '$IP%'";
-		if ($name_fio != "")
-		{
-			$q_p = "SELECT * FROM contact WHERE LOWER(fio) LIKE '%$name_fio%' or fio LIKE '$name_fio% ORDER BY fio'";
-		}
-		else if($otdel != "")
-		{
-			$q_p = "SELECT * FROM contact WHERE who = '$otdel' ORDER BY id";
-			$bool_otdel = 1;
-		}
-		$result = mysql_query($q_p) or die('Введите данные в поле поиска');
-		echo "
-		<h3 align='center'><b>Контакты офиса</b></h3>";
-			//Выведем пользователей		
+		switch ($_POST['action']) {
+			case "ip":
+			$IP = $_POST['IP'];
+			if ($IP != "") {
+				$bool_serch = 0;
+				$bool_otdel = 0;
+				$q_p = "SELECT * FROM contact WHERE tel LIKE '$IP%'";
+				if ($name_fio != "") {
+					$q_p = "SELECT * FROM contact WHERE LOWER(fio) LIKE '%$name_fio%' or fio LIKE '$name_fio% ORDER BY fio'";
+				}
+				else if($otdel != "")	{
+					$q_p = "SELECT * FROM contact WHERE who = '$otdel' ORDER BY id";
+					$bool_otdel = 1;
+				}
+				$result = mysql_query($q_p) or die('Введите данные в поле поиска');
 
-		echo "<table border='1' cellspacing='0' cellpadding='4' align='center'  width = 57%>";
-		echo "
-		<tr>
-			<td width = 325px ALIGN=CENTER><b>ФИО</b></td>
-			<td ALIGN=CENTER><b>Должность</b></td>
-			<td width = 125px ALIGN=CENTER><b>Телефон</b></td>
-			<td width = 80px ALIGN=CENTER><b>Изменить</b></td>
-		</tr>";
+				echo "
+				<tr>
+					<th width = 325px ALIGN=CENTER><b>ФИО</b></td>
+						<th ALIGN=CENTER><b>Должность</b></td>
+							<th width = 125px ALIGN=CENTER><b>Телефон</b></td>
+								<th width = 80px ALIGN=CENTER><b>Изменить</b></td>
+								</tr>";
 				if($bool_otdel == 0) //Если не выбран отдел
 				{
 					while($author = mysql_fetch_array($result))
@@ -123,147 +113,136 @@
 							{
 								echo "
 								<tr>
-									<td ALIGN=CENTER colspan=4><b>".$aut_otdel['who']."</b></td>
+									<th colspan=4>".$aut_otdel['who']."</th>
 								</tr>";
 							}
-							echo "<tr>
-							<td>".$author['fio']."&nbsp;</td>
-							<td ALIGN=CENTER>".$author['spec']."&nbsp;</td>
-							<td>IP ".($author['tel'])."&nbsp</td>
-							<td ALIGN=CENTER>
-								<form method='post' action='update_contact.php'>
-									<input type='hidden' name='update' value='".$author['id']."' />
-									<input type='submit' name='".$author['id']."' value='Изменить'>
-								</form>
-							</td>
-						</tr>";
-					}
-					else
-					{
-						if($bool == 0)
-						{
 							echo "
 							<tr>
-								<td ALIGN=CENTER colspan=4><b>&nbsp;</b></td>
+								<td>".$author['fio']."&nbsp;</td>
+								<td>".$author['spec']."&nbsp;</td>
+								<td>IP ".($author['tel'])."&nbsp</td>
+								<td ALIGN=CENTER>
+									<form method='post' action='update_contact.php'>
+										<input type='hidden' name='update' value='".$author['id']."' />
+										<input type='submit' name='".$author['id']."' value='Изменить'>
+									</form>
+								</td>
 							</tr>";
-							$bool=1;
 						}
-						echo "<tr>
-						<td>".$author['fio']."&nbsp;</td>
-						<td ALIGN=CENTER>".$author['spec']."&nbsp;</td>
-						<td>IP ".($author['tel'])."&nbsp</td>
-						<td ALIGN=CENTER>
-							<form method='post' action='update_contact.php'>
-								<input type='hidden' name='update' value='".$author['id']."' />
-								<input type='submit' name='".$author['id']."' value='Изменить'>
-							</form>
-						</td>
-					</tr>";
-				}
-			}
-		}
-		else
-		{
-					$q_otdel = "SELECT * FROM otdel WHERE id=".$otdel.""; //Выберем все отделы
-					$result_otdel = mysql_query($q_otdel) or die('Нет списка отделов');
-					while($aut_otdel = mysql_fetch_array($result_otdel))
-					{
-						echo "
-						<tr>
-							<td ALIGN=CENTER colspan=4><b>".$aut_otdel['who']."</b></td>
-						</tr>";
+						else
+						{
+							if($bool == 0)
+							{
+								echo "
+								<tr>
+									<th colspan=4><b>&nbsp;</b></td>
+									</tr>";
+									$bool=1;
+								}
+								echo "<tr>
+								<td>".$author['fio']."&nbsp;</td>
+								<td ALIGN=CENTER>".$author['spec']."&nbsp;</td>
+								<td>IP ".($author['tel'])."&nbsp</td>
+								<td ALIGN=CENTER>
+									<form method='post' action='update_contact.php'>
+										<input type='hidden' name='update' value='".$author['id']."' />
+										<input type='submit' name='".$author['id']."' value='Изменить'>
+									</form>
+								</td>
+							</tr>";
+						}
 					}
-					while($author = mysql_fetch_array($result))
-					{
-						echo "<tr>
-						<td>".$author['fio']."&nbsp;</td>
-						<td ALIGN=CENTER>".$author['spec']."&nbsp;</td>
-						<td>IP ".($author['tel'])."&nbsp</td>
-						<td ALIGN=CENTER>
-							<form method='post' action='update_contact.php'>
-								<input type='hidden' name='update' value='".$author['id']."' />
-								<input type='submit' name='".$author['id']."' value='Изменить'>
-							</form>
-						</td>
-					</tr>";
 				}
 			}
-			echo "</table>";
-					//-------------------------  ***  ------------------------------------------------------		
-		}	
-		else
-		{
+			break;
+			case "fio":
+			$name_fio = $_POST['name_fio'];
+			$q_otdel = "SELECT * FROM otdel WHERE id=".$otdel.""; //Выберем все отделы
+			$result_otdel = mysql_query($q_otdel) or die('Нет списка отделов');
+			while($aut_otdel = mysql_fetch_array($result_otdel))
+			{
+				echo "
+				<tr>
+					<th colspan=4>".$aut_otdel['who']."</th>
+				</tr>";
+			}
+			while($author = mysql_fetch_array($result))	{
+				echo "<tr>
+				<td>".$author['fio']."&nbsp;</td>
+				<td ALIGN=CENTER>".$author['spec']."&nbsp;</td>
+				<td>IP ".($author['tel'])."&nbsp</td>
+				<td ALIGN=CENTER>
+					<form method='post' action='update_contact.php'>
+						<input type='hidden' name='update' value='".$author['id']."' />
+						<input type='submit' name='".$author['id']."' value='Изменить'>
+					</form>
+				</td>
+			</tr>";
+		}
+		echo "</table>";
+		break;
+		case "otdel":
+		$otdel = $_POST['otdel'];
 		$q_otdel = "SELECT * FROM otdel ORDER BY id"; //Выберем все отделы
 		$result_otdel = mysql_query($q_otdel) or die('Нет списка отделов');
-		echo "
-		<h3 align='center'><b>Контакты офиса</b></h3>";
-		//Выведем пользователей		
+
 		if($result_otdel && $bool_serch == 0)
 		{
-			echo "<table border='1' cellspacing='0' cellpadding='4' align='center'  width = 57%>";
+
 			echo "
 			<tr>
-				<td width = 325px ALIGN=CENTER><b>ФИО</b></td>
-				<td ALIGN=CENTER><b>Должность</b></td>
-				<td width = 125px ALIGN=CENTER><b>Телефон</b></td>
-				<td width = 80px ALIGN=CENTER><b>Изменить</b></td>
-			</tr>";
-			
-			$q_p = "SELECT * FROM contact WHERE who=0 ORDER BY fio";
-			$result = mysql_query($q_p) or die('Введите данные в поле поиска');
+				<th width = 325px ALIGN=CENTER><b>ФИО</b></td>
+					<th ALIGN=CENTER><b>Должность</b></td>
+						<th width = 125px ALIGN=CENTER><b>Телефон</b></td>
+							<th width = 80px ALIGN=CENTER><b>Изменить</b></td>
+							</tr>";
+							
+							$q_p = "SELECT * FROM contact WHERE who=0 ORDER BY fio";
+							$result = mysql_query($q_p) or die('Введите данные в поле поиска');
 
-			while($author = mysql_fetch_array($result))
-			{
-				echo "<tr>
-				<td>".$author['fio']."&nbsp;</td>
-				<td ALIGN=CENTER>".$author['spec']."&nbsp;</td>
-				<td>IP ".($author['tel'])."&nbsp</td>
-				<td ALIGN=CENTER>
-					<form method='post' action='update_contact.php'>
-						<input type='hidden' name='update' value='".$author['id']."' />
-						<input type='submit' name='".$author['id']."' value='Изменить'>
-					</form>
-				</td>
-			</tr>";
-		}		
-		mysql_free_result($result);
-		while($aut_otdel = mysql_fetch_array($result_otdel))
-		{
-			echo "
-			<tr>
-				<td ALIGN=CENTER colspan=4><b>".$aut_otdel['who']."</b></td>
-			</tr>";
-			$q_p = "SELECT * FROM contact WHERE who=".$aut_otdel['id']." ORDER BY id";
-			$result = mysql_query($q_p) or die('Введите данные в поле поиска');
+							while($author = mysql_fetch_array($result))
+							{
+								echo "<tr>
+								<td>".$author['fio']."&nbsp;</td>
+								<td ALIGN=CENTER>".$author['spec']."&nbsp;</td>
+								<td>IP ".($author['tel'])."&nbsp</td>
+								<td ALIGN=CENTER>
+									<form method='post' action='update_contact.php'>
+										<input type='hidden' name='update' value='".$author['id']."' />
+										<input type='submit' name='".$author['id']."' value='Изменить'>
+									</form>
+								</td>
+							</tr>";
+						}		
+						mysql_free_result($result);
+						while($aut_otdel = mysql_fetch_array($result_otdel)) {
+							echo "
+							<tr>
+								<th colspan=4>".$aut_otdel['who']."</th>
+							</tr>";
+							$q_p = "SELECT * FROM contact WHERE who=".$aut_otdel['id']." ORDER BY id";
+							$result = mysql_query($q_p) or die('Введите данные в поле поиска');
 
-			while($author = mysql_fetch_array($result))
-			{
-				echo "<tr>
-				<td>".$author['fio']."&nbsp;</td>
-				<td ALIGN=CENTER>".$author['spec']."&nbsp;</td>
-				<td>IP ".($author['tel'])."&nbsp</td>
-				<td ALIGN=CENTER>
-					<form method='post' action='update_contact.php'>
-						<input type='hidden' name='update' value='".$author['id']."' />
-						<input type='submit' name='".$author['id']."' value='Изменить'>
-					</form>
-				</td>
-			</tr>";
-		}				
-	}
-	echo "</table>";
-					//-------------------------  ***  ------------------------------------------------------
+							while($author = mysql_fetch_array($result))	{
+								echo "<tr>
+								<td>".$author['fio']."&nbsp;</td>
+								<td ALIGN=CENTER>".$author['spec']."&nbsp;</td>
+								<td>IP ".($author['tel'])."&nbsp</td>
+								<td ALIGN=CENTER>
+									<form method='post' action='update_contact.php'>
+										<input type='hidden' name='update' value='".$author['id']."' />
+										<input type='submit' name='".$author['id']."' value='Изменить'>
+									</form>
+								</td>
+							</tr>";
+						}				
+					}
+					echo "</table>";
+					break;
+				}
 
-}
-else
-{
-	echo "<p><b>Error: ".mysql_error()."</b><p>";
-	exit();
-}
-mysql_free_result($result_otdel);
-}
+			}
 
-	// Освобождаем память от результата	
-mysql_free_result($result);
-?>
-</body>
+
+			?></div>
+		</body>
